@@ -129,20 +129,20 @@ transcoderx.MetadataWithArgs() // with args
 //args
 generic := optionx.Generic{HideBanner: true}
 fprobe := optionx.FFprobe{
-I:                InputVedio,
-PrintFormat:      optionx.OutputFormat_json,
-ShowError:        true,
-ShowFormat:       true,
-ShowStreams:      true,
+    I:                InputVedio,
+    PrintFormat:      optionx.OutputFormat_json,
+    ShowError:        true,
+    ShowFormat:       true,
+    ShowStreams:      true,
 }
 transcoderx.Debug = true
 metadata, err := transcoderx.MetadataWithArgs(FfprobeBin, paramx.BuildIArgInterface(generic, fprobe), transcoderx.JsonUnmarshal, func(out []byte, err []byte) {
-//bytes
-})
+    //bytes
+	})
 
 if err != nil {
-fmt.Println("MetadataX", err)
-return
+    fmt.Println("MetadataX", err)
+    return
 }
 fmt.Println(metadata.Format)
 fmt.Println(metadata.Streams) // println Streams
@@ -168,7 +168,7 @@ fmt.Println(metadatax.ChannelNames[layout.Layout.Mask]) //{LFE low frequency}
 ```go
 
 transcoderx.Debug = true // show args
-duration := 1000 * time.Millisecond
+duration := 1000 * time.Millisecond  
 killDuration := duration * 100
 
 background, cc := context.WithTimeout(context.Background(), duration) // ctx
@@ -176,20 +176,20 @@ defer cc()
 
 //Ph:= impl interfacex.ProgressHandle // set your self method to parse progress
 runFunc, err := transcoderx.Pipeline(FfmpegBin, Ph, makeParamsToHls(), func(cmd *exec.Cmd) {
-cmd.Dir = "/tmp"
+    cmd.Dir = "/tmp"
 })
 if err != nil {
-return
+    return
 }
 err = runFunc(background, func(process *os.Process) {
-go func() {
-time.Sleep(killDuration) // after killDuration 
-process.Kill()
-}()
+    go func() {
+        time.Sleep(killDuration) // after killDuration 
+        process.Kill()
+    }()
 }, func(progress metadatax.Progress) {
-//progress:: {1 0.0 -1.0 N/A 00:00:00.03 N/A  N/A      }
-//progress:: {16 0.0 -1.0 N/A 00:00:00.53 N/A  1.06x      }
-fmt.Println("progress::", progress)
+    //progress:: {1 0.0 -1.0 N/A 00:00:00.03 N/A  N/A      }
+	//progress:: {16 0.0 -1.0 N/A 00:00:00.53 N/A  1.06x      }
+    fmt.Println("progress::", progress)
 })
 
 ```

@@ -16,7 +16,7 @@ import (
 func TestPipeline(t *testing.T) {
 	transcoderx.Debug = true
 	duration := 1000 * time.Millisecond
-	killDuration := duration * 100
+	killDuration := duration / 100
 	background, cc := context.WithTimeout(context.Background(), duration)
 	defer cc()
 	//=========
@@ -32,6 +32,34 @@ func TestPipeline(t *testing.T) {
 		return
 	}
 	err = runFunc(background, func(process *os.Process) {
+		go func() {
+			time.Sleep(killDuration)
+			cc()
+		}()
+	}, func(progress metadatax.Progress) {
+		fmt.Println("progress::", progress)
+	})
+	fmt.Println("transcoderx.Pipeline", err)
+}
+func TestPipelineCtx(t *testing.T) {
+	transcoderx.Debug = true
+	duration := 1000 * time.Millisecond
+	killDuration := duration / 100
+	background, cc := context.WithTimeout(context.Background(), duration)
+	defer cc()
+	//=========
+	fmt.Println("Start", time.Now().Format(time.DateTime))
+	now := time.Now()
+	defer func() {
+		fmt.Println("Since", time.Since(now))
+	}()
+	runFunc, err := transcoderx.PipelineCtx(background, FfmpegBin, nil, makeParamsToHls(), func(cmd *exec.Cmd) {
+		cmd.Dir = "/tmp"
+	})
+	if err != nil {
+		return
+	}
+	err = runFunc(func(process *os.Process) {
 		go func() {
 			time.Sleep(killDuration)
 			process.Kill()

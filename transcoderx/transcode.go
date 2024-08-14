@@ -1,6 +1,7 @@
 package transcoderx
 
 import (
+	"context"
 	"github.com/elizabevil/ffmpegx/metadatax"
 	"github.com/elizabevil/ffmpegx/transcoderx/interfacex"
 	"os"
@@ -39,6 +40,9 @@ func (r Transcoder) StartProcess(handles ...func(command *os.ProcAttr)) (*os.Pro
 
 func (r Transcoder) Pipeline(cmdHandles ...CmdHandle) (metadatax.ProcessCtxHandle, error) {
 	return Pipeline(r.Config.FFmpegBin, r.Ph, r.Args, cmdHandles...)
+}
+func (r Transcoder) PipelineCtx(ctx context.Context, cmdHandles ...CmdHandle) (metadatax.ProcessHandle, error) {
+	return PipelineCtx(ctx, r.Config.FFmpegBin, r.Ph, r.Args, cmdHandles...)
 }
 
 func (r Transcoder) PipelinePlay(cmdHandles ...CmdHandle) (metadatax.FFplayCtxHandle, error) {

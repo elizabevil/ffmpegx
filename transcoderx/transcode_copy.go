@@ -158,6 +158,60 @@ func Pipeline(bin string, ph interfacex.ProgressHandle, args interfacex.IArg, ha
 			select {
 			case <-cancelCtx.Done():
 				return err
+			case <-ctx.Done():
+				cmd.Process.Kill()
+				return ctx.Err()
+			case data, ok := <-out:
+				if ok && hasFunc {
+					for _, item := range progressHandle {
+						item(data)
+					}
+				}
+			}
+		}
+	}, nil
+}
+
+// PipelineCtx bin:ffmpeg/ffplay Overload Realtime: Chan ProgressHandle
+func PipelineCtx(ctx context.Context, bin string, ph interfacex.ProgressHandle, args interfacex.IArg, handles ...CmdHandle) (metadatax.ProcessHandle, error) {
+	err := verify(bin, args)
+	if err != nil {
+		return nil, err
+	}
+	cmd := exec.CommandContext(ctx, bin, args.Args()...)
+	for _, handle := range handles {
+		handle(cmd)
+	}
+	DebugPrint("%s", cmd.String())
+	return func(handle func(process *os.Process), progressHandle ...metadatax.ProgressHandle) error {
+		stderrIn, err := cmd.StderrPipe()
+		if err != nil {
+			return fmt.Errorf("pipe %w", err)
+		}
+		err = cmd.Start()
+		if err != nil {
+			return fmt.Errorf("start %w", err)
+		}
+		if handle != nil {
+			handle(cmd.Process)
+		}
+		cancelCtx, cancelFunc := context.WithCancel(ctx)
+		out := make(chan metadatax.Progress)
+		go func() {
+			if ph == nil {
+				ph = metadatax.DefaultProgress{}
+			}
+			ph.MakeProgress(cancelCtx, stderrIn, out)
+		}()
+		go func() {
+			err = cmd.Wait()
+			cancelFunc()
+		}()
+		hasFunc := progressHandle != nil
+		for {
+			select {
+			case <-cancelCtx.Done():
+				return err
 			case data, ok := <-out:
 				if ok && hasFunc {
 					for _, item := range progressHandle {

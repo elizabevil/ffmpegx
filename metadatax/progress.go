@@ -108,7 +108,12 @@ func (r DefaultProgress) MakeProgress(ctx context.Context, stream io.ReadCloser,
 	if ctx == nil || ctx.Err() != nil {
 		return
 	}
-	r.progressHandle(ctx, r.makeScanner(stream), out)
+	go r.progressHandle(ctx, r.makeScanner(stream), out)
+	select {
+	case <-ctx.Done():
+		close(out)
+		return
+	}
 }
 func (r DefaultProgress) progressHandle(ctx context.Context, scanner *bufio.Scanner, out chan Progress) {
 	pp := Progress{}
@@ -120,15 +125,9 @@ func (r DefaultProgress) progressHandle(ctx context.Context, scanner *bufio.Scan
 		} else {
 			next = strings.Contains(line, "time=") && strings.Contains(line, "bitrate=") && strings.Contains(line, "speed=")
 		}
-		if next {
-			select {
-			case <-ctx.Done():
-				close(out)
-				return
-			default:
-				makeProgress(line, &pp)
-				out <- pp
-			}
+		if next && ctx.Err() == nil {
+			makeProgress(line, &pp)
+			out <- pp
 		}
 	}
 }
