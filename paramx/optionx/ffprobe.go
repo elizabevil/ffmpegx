@@ -58,10 +58,10 @@ const (
 )
 
 type WriterOption struct {
-	StringValidation            int `json:"string_validation" flag:"-string_validation"`                         //0, WRITER_STRING_VALIDATION_NB-1, .unit = "sv//
-	Sv                          Sv  `json:"sv" flag:"-sv"`                                                       //0, WRITER_STRING_VALIDATION_NB-1, .unit = "sv//
-	StringValidationReplacement int `json:"string_validation_replacement" flag:"-string_validation_replacement"` // "set string validation replacement string", OFFSET(string_validation_replacement), AV_OPT_TYPE_STRING, {.str=""}},
-	Svr                         int `json:"svr" flag:"-svr"`                                                     // "set string validation replacement string", OFFSET(string_validation_replacement), AV_OPT_TYPE_STRING, {.str="\xEF\xBF\xBD"}},
+	StringValidation            typex.UI8    `json:"string_validation" flag:"-string_validation"`                         //0, WRITER_STRING_VALIDATION_NB-1, .unit = "sv//
+	Sv                          Sv           `json:"sv" flag:"-sv"`                                                       //0, WRITER_STRING_VALIDATION_NB-1, .unit = "sv//
+	StringValidationReplacement typex.String `json:"string_validation_replacement" flag:"-string_validation_replacement"` // "set string validation replacement string", OFFSET(string_validation_replacement), AV_OPT_TYPE_STRING, {.str=""}},
+	Svr                         typex.String `json:"svr" flag:"-svr"`                                                     // "set string validation replacement string", OFFSET(string_validation_replacement), AV_OPT_TYPE_STRING, {.str="\xEF\xBF\xBD"}},
 }
 
 type Sv = typex.Flags

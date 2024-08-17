@@ -4,7 +4,7 @@ import "github.com/elizabevil/ffmpegx/paramx/typex"
 
 // AC3 5.1 ac3
 type AC3 struct {
-	DrcScale typex.UFloat32 `json:"drc_scale" flag:"-drc_scale,1"`
+	DrcScale typex.UFlt `json:"drc_scale" flag:"-drc_scale,1"`
 	/*drc_scale == 0
 	DRC disabled. Produces full range audio.
 

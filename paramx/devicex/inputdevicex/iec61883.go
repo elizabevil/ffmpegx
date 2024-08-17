@@ -19,7 +19,7 @@ type IEC61883 struct {
 ffmpeg -f iec61883 -i auto -dvbuffer 100000 out.mpg
 */
 
-type Dvtype string
+type Dvtype = typex.String
 
 const (
 	Dvtype_auto Dvtype = "auto"

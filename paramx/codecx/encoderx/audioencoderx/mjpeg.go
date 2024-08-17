@@ -1,5 +1,7 @@
 package audioencoderx
 
+import "github.com/elizabevil/ffmpegx/paramx/typex"
+
 // MJPEG 8.14 mjpeg
 type MJPEG struct {
 	Huffman Huffman `json:"huffman" flag:"-huffman"`

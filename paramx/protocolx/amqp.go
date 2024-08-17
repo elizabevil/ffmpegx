@@ -7,12 +7,12 @@ import (
 
 // 24.1 amqp
 type Amqp struct {
-	Exchange string `json:"exchange" glag:"-exchange"`
+	Exchange typex.String `json:"exchange" glag:"-exchange"`
 	//Sets the exchange to use on the broker.RabbitMQ has several predefined exchanges: "amq.direct" is the default exchange, where the publisher and subscriber must have a matching routing_key;
 	//"amq.fanout" is the same as a broadcast operation (i.e.the data is forwarded to all queues on the fanout exchange independent of the routing_key);
 	//and "amq.topic" is similar to "amq.direct", but allows for more complex pattern matching (refer to the RabbitMQ documentation).
 
-	RoutingKey string `json:"routing_key" glag:"-routing_key"`
+	RoutingKey typex.Key `json:"routing_key" glag:"-routing_key"`
 	//Sets the routing key.The default value is "amqp".The routing key is used on the "amq.direct" and "amq.topic" exchanges to decide whether packets are written to the queue of a subscriber.
 
 	PktSize typex.Size `json:"pkt_size" glag:"-pkt_size"`

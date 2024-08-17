@@ -71,7 +71,7 @@ type AC3ExtendedBitstream struct {
 
 // AC3Encoding 8.2.3 Other AC-3 Encoding Options
 type AC3Encoding struct {
-	StereoRematrixing bool         `json:"stereo_rematrixing" flag:"-stereo_rematrixing"`
+	StereoRematrixing typex.UBool  `json:"stereo_rematrixing" flag:"-stereo_rematrixing"`
 	Cutoff            typex.Cutoff `json:"cutoff" flag:"-cutoff"`
 }
 

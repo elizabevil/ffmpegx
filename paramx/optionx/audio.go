@@ -3,7 +3,7 @@ package optionx
 import "github.com/elizabevil/ffmpegx/paramx/typex"
 
 type Audio struct {
-	Aframes int `json:"aframes" flag:"-aframes"` // aframes  number (output)
+	Aframes typex.Frames `json:"aframes" flag:"-aframes"` // aframes  number (output)
 	//Set the number of audio frames to output. This is an obsolete alias for -frames:a, which you should use instead.
 
 	Ar typex.StreamSpecifier `json:"ar" flag:"-ar"` // ar [:stream_specifier] freq (input/output,per-stream)
@@ -25,7 +25,7 @@ type Audio struct {
 	//-sample_fmt[:stream_specifier] sample_fmt (output,per-stream)
 	//Set the audio sample format. Use -sample_fmts to get a list of supported sample formats.
 
-	Af typex.Filtergraph `json:"af" flag:"-af"` // af  filtergraph (output)
+	Af typex.FilterGraph `json:"af" flag:"-af"` // af  filtergraph (output)
 	//Create the filtergraph specified by filtergraph and use it to filter the stream.
 	//This is an alias for -filter:a, see the -filter option.
 

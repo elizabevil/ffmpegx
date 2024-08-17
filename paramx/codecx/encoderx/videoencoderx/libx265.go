@@ -17,13 +17,13 @@ type Libx265 struct {
 	Refs typex.Level `json:"refs" flag:"-refs"`
 	//Number of reference frames each P-frame can use. The range is from 1-16.
 
-	Preset string `json:"preset" flag:"-preset"`
+	Preset typex.String `json:"preset" flag:"-preset"`
 	//Set the x265 preset.
 
-	Tune string `json:"tune" flag:"-tune"`
+	Tune typex.String `json:"tune" flag:"-tune"`
 	//Set the x265 tune parameter.
 
-	Profile string `json:"profile" flag:"-profile"`
+	Profile typex.Profile `json:"profile" flag:"-profile"`
 	//Set profile restrictions.
 
 	Crf typex.UI8 `json:"crf" flag:"-crf"`
@@ -41,7 +41,7 @@ type Libx265 struct {
 	Qdiff typex.Number `json:"qdiff" flag:"-qdiff"`
 	//Maximum difference between quantizer scales.
 
-	Qblur typex.UFloat32 `json:"qblur" flag:"-qblur"` //	Quantizer curve blur
+	Qblur typex.UFlt `json:"qblur" flag:"-qblur"` //	Quantizer curve blur
 
 	Qcomp typex.Flt `json:"qcomp" flag:"-qcomp"` //	Quantizer curve compression factor
 
@@ -53,7 +53,7 @@ type Libx265 struct {
 	UduSei typex.UBool `json:"udu_sei" flag:"-udu_sei"`
 	//Import user data unregistered SEI if available into output. Default is 0 (off).
 
-	X265Params string `json:"x265-params" flag:"-x265-params"`
+	X265Params typex.Dict `json:"x265-params" flag:"-x265-params"`
 	//Set x265 options using a list of key=value couples separated by ":". See x265 --help for a list of options.
 
 }

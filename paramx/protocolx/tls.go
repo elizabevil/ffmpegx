@@ -10,7 +10,7 @@ import (
 // Transport Layer Security (TLS) / Secure Sockets Layer (SSL)
 // tls://hostname:port[?options]
 type TLS struct {
-	CaFile bool `json:"cafile" flag:"-cafile"` // filename
+	CaFile typex.FileName `json:"cafile" flag:"-cafile"` // filename
 	//A file containing certificate authority (CA) root certificates to treat as trusted.If the linked TLS library contains a default this might not need to be specified for verification to work, but not all libraries and setups have defaults built in.The file must be in OpenSSL PEM format.
 
 	TlsVerify typex.Bool `json:"tls_verify" flag:"-tls_verify"` // 1|0
@@ -18,16 +18,16 @@ type TLS struct {
 
 	//This is disabled by default since it requires a CA database to be provided by the caller in many cases.
 
-	CertFile string `json:"cert" flag:"-cert"` // filename
+	CertFile typex.FileName `json:"cert" flag:"-cert"` // filename
 	//A file containing a certificate to use in the handshake with the peer.(When operating as server, in listen mode, this is more often required by the peer, while client certificates only are mandated in certain setups.)
 
-	KeyFile string `json:"key" flag:"-key"` // filename
+	KeyFile typex.FileName `json:"key" flag:"-key"` // filename
 	//A file containing the private key for the certificate.
 
-	Listen bool `json:"listen" flag:"-listen"` // 1|0
+	Listen typex.UBool `json:"listen" flag:"-listen"` // 1|0
 	//If enabled, listen for connections on the provided port, and assume the server role in the handshake instead of the client role.
 
-	HttpProxy bool `json:"http_proxy" flag:"-http_proxy"`
+	HttpProxy typex.Url `json:"http_proxy" flag:"-http_proxy"`
 	//The HTTP proxy to tunnel through, e.g.http: //example.com:1234. The proxy must support the CONNECT method.
 
 }

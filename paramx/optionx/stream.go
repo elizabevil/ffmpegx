@@ -30,7 +30,7 @@ type OutputStream struct {
 	Frames                   typex.Number            `json:"frames"                      flag:"-frames"`                      // [:stream_specifier] framecount (output, per-stream)    ffmpeg -f fbdev -framerate 1 -i /dev/fb0 -frames:v 1 screenshot.jpeg
 	Q                        []typex.StreamSpecifier `json:"q"                           flag:"-q"`                           // [:stream_specifier] q (output, per-stream)
 	Qscale                   string                  `json:"qscale"                      flag:"-qscale"`                      // [:stream_specifier] q (output, per-stream)
-	Filter                   typex.Filtergraph       `json:"filter"                      flag:"-filter"`                      // [:stream_specifier] filtergraph (output, per-stream)
+	Filter                   typex.FilterGraph       `json:"filter"                      flag:"-filter"`                      // [:stream_specifier] filtergraph (output, per-stream)
 	Pre                      string                  `json:"pre"                         flag:"-pre"`                         // [:stream_specifier] preset_name (output, per-stream)
 	Fpsmax                   string                  `json:"fpsmax"                      flag:"-fpsmax"`                      // [:stream_specifier] fps (output, per-stream)
 	Aspect                   typex.Aspect            `json:"aspect"                      flag:"-aspect"`                      // [:stream_specifier] aspect (output, per-stream)

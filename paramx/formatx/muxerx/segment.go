@@ -15,7 +15,7 @@ type Segment struct {
 	SegmentFormat typex.Format `json:"segment_format" flag:"-segment_format"`
 	//Override the inner container format, by default it is guessed by the filename extension.
 
-	SegmentFormatOptions typex.DICT `json:"segment_format_options" flag:"-segment_format_options"`
+	SegmentFormatOptions typex.Dict `json:"segment_format_options" flag:"-segment_format_options"`
 	//Set output format options using a :-separated list of key=value parameters. Values containing the : special character must be escaped.
 
 	SegmentListFlags SegmentListFlags `json:"segment_list_flags" flag:"-segment_list_flags"`

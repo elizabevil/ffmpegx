@@ -11,15 +11,15 @@ type Decklink struct {
 	ListDevices typex.BoolStr `json:"list_devices" flag:"-list_devices"` //
 	//If set to true, print a list of devices and exit. Defaults to false. This option is deprecated, please use the -sources option of ffmpeg to list the available input devices.
 
-	ListFormats bool `json:"list_formats" flag:"-list_formats"` //
+	ListFormats typex.UBool `json:"list_formats" flag:"-list_formats"` //
 	//If set to true, print a list of supported formats and exit. Defaults to false.
 
-	FormatCode bool `json:"format_code" flag:"-format_code"` //<FourCC>
+	FormatCode typex.Format `json:"format_code" flag:"-format_code"` //<FourCC>
 	//This sets the input video format to the format given by the FourCC. To see the supported values of your device(s) use list_formats. Note that there is a FourCC 'pal ' that can also be used as pal (3 letters). Default behavior is autodetection of the input video format, if the hardware supports it.
 
 	RawFormat RawFormat `json:"raw_format" flag:"-raw_format"` //
 	//Set the pixel format of the captured video. Available values are:
-	TeletextLines bool `json:"teletext_lines" flag:"-teletext_lines"` //
+	TeletextLines typex.UNumber `json:"teletext_lines" flag:"-teletext_lines"` //
 	//If set to nonzero, an additional teletext stream will be captured from the vertical ancillary data. Both SD PAL (576i) and HD (1080i or 1080p) sources are supported. In case of HD sources, OP47 packets are decoded.
 
 	//This option is a bitmask of the SD PAL VBI lines captured, specifically lines 6 to 22, and lines 318 to 335. Line 6 is the LSB in the mask. Selected lines which do not contain teletext information will be ignored. You can use the special all constant to select all possible lines, or standard to skip lines 6, 318 and 319, which are not compatible with all receivers.
@@ -38,7 +38,7 @@ type Decklink struct {
 
 	//Valid profile modes for DeckLink Quad 2 and DeckLink Duo 2: ‘half, ‘full
 
-	TimecodeFormat bool `json:"timecode_format" flag:"-timecode_format"` //
+	TimecodeFormat TimecodeFormat `json:"timecode_format" flag:"-timecode_format"` //
 	//Timecode type to include in the frame and video stream metadata. Must be ‘none, ‘rp188vitc, ‘rp188vitc2, ‘rp188ltc, ‘rp188hfr, ‘rp188any, ‘vitc, ‘vitc2, or ‘serial. Defaults to ‘none (not included).
 
 	//In order to properly support 50/60 fps timecodes, the ordering of the queried timecode types for ‘rp188any is HFR, VITC1, VITC2 and LTC for >30 fps content. Note that this is slightly different to the ordering used by the DeckLink API, which is HFR, VITC1, LTC, VITC2.
@@ -55,7 +55,7 @@ type Decklink struct {
 	AudioPts PTS `json:"audio_pts" flag:"-audio_pts"` //
 	//Sets the audio packet timestamp source. Must be ‘video, ‘audio, ‘reference, ‘wallclock or ‘abs_wallclock. Defaults to ‘audio.
 
-	DrawBars bool `json:"draw_bars" flag:"-draw_bars"` //
+	DrawBars typex.UBool `json:"draw_bars" flag:"-draw_bars"` //
 	//If set to ‘true, color bars are drawn in the event of a signal loss. Defaults to ‘true.
 
 	QueueSize typex.Size `json:"queue_size" flag:"-queue_size"` //
@@ -64,16 +64,16 @@ type Decklink struct {
 	AudioDepth AudioDepth `json:"audio_depth" flag:"-audio_depth"` //
 	//Sets the audio sample bit depth. Must be ‘16 or ‘32. Defaults to ‘16.
 
-	DecklinkCopyts bool `json:"decklink_copyts" flag:"-decklink_copyts"` //
+	DecklinkCopyts typex.UBool `json:"decklink_copyts" flag:"-decklink_copyts"` //
 	//If set to true, timestamps are forwarded as they are without removing the initial offset. Defaults to false.
 
-	TimestampAlign typex.Bool `json:"timestamp_align" flag:"-timestamp_align"` //
+	TimestampAlign typex.SecondI `json:"timestamp_align" flag:"-timestamp_align"` //
 	//Capture start time alignment in seconds. If set to nonzero, input frames are dropped till the system timestamp aligns with configured value. Alignment difference of up to one frame duration is tolerated. This is useful for maintaining input synchronization across N different hardware devices deployed for N-way redundancy. The system time of different hardware devices should be synchronized with protocols such as NTP or PTP, before using this option. Note that this method is not foolproof. In some border cases input synchronization may not happen due to thread scheduling jitters in the OS. Either sync could go wrong by 1 frame or in a rarer case timestamp_align seconds. Defaults to ‘0.
 
-	WaitForTc bool `json:"wait_for_tc" flag:"-wait_for_tc"` // (bool)
+	WaitForTc typex.UBool `json:"wait_for_tc" flag:"-wait_for_tc"` // (bool)
 	//Drop frames till a frame with timecode is received. Sometimes serial timecode isnt received with the first input frame. If that happens, the stored stream timecode will be inaccurate. If this option is set to true, input frames are dropped till a frame with timecode is received. Option timecode_format must be specified. Defaults to false.
 
-	EnableKlv bool `json:"enable_klv" flag:"-enable_klv"` //(bool)
+	EnableKlv typex.UBool `json:"enable_klv" flag:"-enable_klv"` //(bool)
 	//If set to true, extracts KLV data from VANC and outputs KLV packets. KLV VANC packets are joined based on MID and PSC fields and aggregated into one KLV packet. Defaults to false.
 }
 
@@ -93,9 +93,9 @@ Capture video clip at 1080i50 with 16 audio channels:
 */
 
 type RawFormat = typex.Format
-type TimecodeFormat string
-type VideoInput string
-type AudioInput string
+type TimecodeFormat = typex.String
+type VideoInput = typex.String
+type AudioInput = typex.String
 type ChannelNumber = int8
 
 const (
@@ -153,8 +153,8 @@ const (
 	AudioInput_microphone AudioInput = "microphone"
 )
 
-type PTS string
-type AudioDepth string
+type PTS = typex.String
+type AudioDepth = typex.String
 
 const (
 	AudioDepth_16 AudioDepth = "16"

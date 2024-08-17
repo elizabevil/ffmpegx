@@ -37,13 +37,7 @@ type Decoding struct {
 }
 
 type Coding struct {
-	Fdebug   int `UNumber:"fdebug" flag:"-fdebug"`    // "print specific debug info", OFFSET(debug), AV_OPT_TYPE_FLAGS, {.i64 = DEFAULT }, 0, INT_MAX, E|D, .unit = "fdebug"},
-	Ts       int `json:"ts" flag:"-ts"`               // NULL, 0, AV_OPT_TYPE_CONST, {.i64 = FF_FDEBUG_TS }, INT_MIN, INT_MAX, E|D, .unit = "fdebug"},
-	MaxDelay int `json:"max_delay" flag:"-max_delay"` // "maximum muxing or demuxing delay in microseconds", OFFSET(max_delay), AV_OPT_TYPE_INT, {.i64 = -1 }, -1, INT_MAX, E|D},
-}
-
-type Codec struct {
-	Fdebug   int `UNumber:"fdebug" flag:"-fdebug"`    // "print specific debug info", OFFSET(debug), AV_OPT_TYPE_FLAGS, {.i64 = DEFAULT }, 0, INT_MAX, E|D, .unit = "fdebug"},
-	Ts       int `json:"ts" flag:"-ts"`               // NULL, 0, AV_OPT_TYPE_CONST, {.i64 = FF_FDEBUG_TS }, INT_MIN, INT_MAX, E|D, .unit = "fdebug"},
-	MaxDelay int `json:"max_delay" flag:"-max_delay"` // "maximum muxing or demuxing delay in microseconds", OFFSET(max_delay), AV_OPT_TYPE_INT, {.i64 = -1 }, -1, INT_MAX, E|D},
+	Fdebug   typex.UNumber `json:"fdebug" flag:"-fdebug"`       // "print specific debug info", OFFSET(debug), AV_OPT_TYPE_FLAGS, {.i64 = DEFAULT }, 0, INT_MAX, E|D, .unit = "fdebug"},
+	Ts       typex.UNumber `json:"ts" flag:"-ts"`               // NULL, 0, AV_OPT_TYPE_CONST, {.i64 = FF_FDEBUG_TS }, INT_MIN, INT_MAX, E|D, .unit = "fdebug"},
+	MaxDelay typex.UNumber `json:"max_delay" flag:"-max_delay"` // "maximum muxing or demuxing delay in microseconds", OFFSET(max_delay), AV_OPT_TYPE_INT, {.i64 = -1 }, -1, INT_MAX, E|D},
 }

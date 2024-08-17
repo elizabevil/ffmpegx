@@ -35,7 +35,7 @@ type CACA struct {
 	//List available dither options related to the argument. The argument must be one of algorithms, antialiases, charsets, colors.
 }
 
-type ListDither string
+type ListDither = typex.String
 
 const (
 	ListDither_algorithms  ListDither = "algorithms"

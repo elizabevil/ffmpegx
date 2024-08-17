@@ -16,7 +16,7 @@ type LIBCDIO struct {
 	//For more information about the available recovery modes, consult the paranoia project documentation.
 
 }
-type ParanoiaMode string
+type ParanoiaMode = typex.String
 
 const (
 	ParanoiaMode_disable   ParanoiaMode = "disable"

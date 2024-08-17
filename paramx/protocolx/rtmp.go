@@ -24,7 +24,7 @@ type Rtmp struct {
 	Playpath string `json:"playpath" flag:"-playpath"`
 	//It is the path or name of the resource to play with reference to the application specified in app, may be prefixed by "mp4:". You can override the value parsed from the URI through the rtmp_playpath option, too.
 
-	Listen bool `json:"listen" flag:"-listen"`
+	Listen typex.UBool `json:"listen" flag:"-listen"`
 	//Act as a server, listening for an incoming connection.
 
 	Timeout typex.Timeout `json:"timeout" flag:"-timeout"`
@@ -60,7 +60,7 @@ type Rtmp struct {
 	RtmpSubscribe string `json:"rtmp_subscribe" flag:"-rtmp_subscribe"`
 	//mask of live stream to subscribe to. By default no value will be sent. It is only sent if the option is specified or if rtmp_live is set to live.
 
-	RtmpSwfhash bool `json:"rtmp_swfhash" flag:"-rtmp_swfhash"`
+	RtmpSwfhash typex.FileName `json:"rtmp_swfhash" flag:"-rtmp_swfhash"`
 	//SHA256 hash of the decompressed SWF file (32 bytes).
 
 	RtmpSwfsize typex.Size `json:"rtmp_swfsize" flag:"-rtmp_swfsize"`

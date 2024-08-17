@@ -24,9 +24,9 @@ type FFplay struct {
 	Top typex.Position `json:"top" flag:"-top"` // {&screen_top }, "set the y position for the top of the window", "y pos" },
 
 	Loop typex.Number      `json:"loop" flag:"-loop"` // {&loop }, "set number of times the playback shall be looped", "loop count" },
-	Vf   typex.Filtergraph `json:"vf" flag:"-vf"`     // {.func_arg = opt_add_vfilter }, "set video filters", "filter_graph" },
+	Vf   typex.FilterGraph `json:"vf" flag:"-vf"`     // {.func_arg = opt_add_vfilter }, "set video filters", "filter_graph" },
 
-	Af       typex.Filtergraph `json:"af" flag:"-af"`             // {&afilters }, "set audio filters", "filter_graph" },
+	Af       typex.FilterGraph `json:"af" flag:"-af"`             // {&afilters }, "set audio filters", "filter_graph" },
 	Showmode Showmode          `json:"showmode" flag:"-showmode"` // {.func_arg = opt_show_mode}, "select show mode (0 = video, 1 = waves, 2 = RDFT)", "mode" },
 	I        typex.FileName    `json:"i" flag:"-i"`               // {&dummy}, "read specified file", "input_file"},
 }
@@ -80,16 +80,16 @@ type FFplayExpert struct {
 	Infbuf   bool `json:"infbuf" flag:"-infbuf"`     // {&infinite_buffer }, "don't limit the input buffer size (useful with realtime streams)"
 	NoInfbuf bool `json:"noinfbuf" flag:"-noinfbuf"` // {&infinite_buffer }, "don't limit the input buffer size (useful with realtime streams)"
 
-	Acodec typex.String `json:"acodec" flag:"-acodec"` // {   &audio_codec_name }, "force audio decoder",    "decoder_name" },
+	Acodec typex.Codec `json:"acodec" flag:"-acodec"` // {   &audio_codec_name }, "force audio decoder",    "decoder_name" },
 
-	Scodec typex.String `json:"scodec" flag:"-scodec"` // {&subtitle_codec_name }, "force subtitle decoder", "decoder_name" },
+	Scodec typex.Codec `json:"scodec" flag:"-scodec"` // {&subtitle_codec_name }, "force subtitle decoder", "decoder_name" },
 
-	Vcodec typex.String `json:"vcodec" flag:"-vcodec"` // {   &video_codec_name }, "force video decoder",    "decoder_name" },
+	Vcodec typex.Codec `json:"vcodec" flag:"-vcodec"` // {   &video_codec_name }, "force video decoder",    "decoder_name" },
 
 	FilterThreads typex.NbThreads `json:"filter_threads" flag:"-filter_threads"` // {&filter_nbthreads }, "number of filter threads per graph" },
 	EnableVulkan  bool            `json:"enable_vulkan" flag:"-enable_vulkan"`   // {&enable_vulkan }, "enable vulkan renderer" },
 
-	VulkanParams typex.ParamsKv `json:"vulkan_params" flag:"-vulkan_params"` // {&vulkan_params }, "vulkan configuration using a list of key=value pairs separated by ':'" },
+	VulkanParams typex.Param `json:"vulkan_params" flag:"-vulkan_params"` // {&vulkan_params }, "vulkan configuration using a list of key=value pairs separated by ':'" },
 
 	Hwaccel typex.String `json:"hwaccel" flag:"-hwaccel"` // {&hwaccel }, "use HW accelerated decoding" },
 

@@ -57,7 +57,7 @@ type Common struct {
 	//5.5 Video Options
 	Vcodec    typex.Codec     `json:"vcodec" flag:"-vcodec"`
 	SampleFmt typex.SampleFmt `json:"sample_fmt" flag:"-sample_fmt"`
-	Dcodec    int             `json:"dcodec" flag:"-dcodec"`
+	Dcodec    typex.Codec     `json:"dcodec" flag:"-dcodec"`
 	Top       typex.Codec     `json:"top" flag:"-top"`
 }
 

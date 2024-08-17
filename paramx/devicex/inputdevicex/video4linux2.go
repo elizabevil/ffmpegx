@@ -40,7 +40,7 @@ type VIDEO4LINUX2 struct {
 	//Use libv4l2 (v4l-utils) conversion functions. Default is 0.
 }
 
-type ListFormats string
+type ListFormats = typex.String
 
 const (
 	ListFormats_all ListFormats = "all"
@@ -53,7 +53,7 @@ const (
 	//Show only compressed formats.
 )
 
-type Ts string
+type Ts = typex.String
 
 const (
 	Ts_default Ts = "default"

@@ -22,9 +22,9 @@ type Global struct {
 	Dump         bool           `json:"dump"                    flag:"-dump"`
 	Hex          bool           `json:"hex"                     flag:"-hex"`
 	//Vsync                   bool              `json:"vsync"                   flag:"-vsync"`
-	FilterComplex           typex.Filtergraph `json:"filter_complex"          flag:"-filter_complex"`
+	FilterComplex           typex.FilterGraph `json:"filter_complex"          flag:"-filter_complex"`
 	FilterComplexThreads    typex.NbThreads   `json:"filter_complex_threads"  flag:"-filter_complex_threads"` //The default is the number of available CPUs.
-	Lavfi                   typex.Filtergraph `json:"lavfi"                   flag:"-lavfi"`
+	Lavfi                   typex.FilterGraph `json:"lavfi"                   flag:"-lavfi"`
 	SdpFile                 bool              `json:"sdp_file"                flag:"-sdp_file"`
 	AbortOn                 flagx.AbortOn     `json:"abort_on"                flag:"-abort_on"`
 	MaxErrorRate            bool              `json:"max_error_rate"          flag:"-max_error_rate"` // Range is a floatingpoint number between 0 to 1. Default is 2/3.

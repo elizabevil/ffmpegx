@@ -28,7 +28,7 @@ type LIBMODPLUG struct {
 	MaxSize typex.UNumber `json:"max_size" flag:"-max_size"`
 	//The demuxer buffers the entire file into memory. Adjust this value to set the maximum buffer size, which in turn, acts as a ceiling for the size of files that can be read. Range is 0 to 100 MiB. 0 removes buffer size limit (not recommended). Default is 5 MiB.
 
-	VideoStreamExpr int `json:"video_stream_expr" flag:"-video_stream_expr"`
+	VideoStreamExpr typex.String `json:"video_stream_expr" flag:"-video_stream_expr"`
 	//String which is evaluated using the eval API to assign colors to the generated video stream. Variables which can be used are x, y, w, h, t, speed, tempo, order, pattern and row.
 
 	VideoStream typex.UBool `json:"video_stream" flag:"-video_stream"`

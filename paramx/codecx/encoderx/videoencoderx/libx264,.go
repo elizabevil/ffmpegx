@@ -23,7 +23,7 @@ type LIBX264 struct {
 	Qdiff typex.Number `json:"qdiff" flag:"-qdiff"` //(qpstep)
 	//Maximum difference between quantizer scales
 
-	Qblur typex.UFloat32 `json:"qblur" flag:"-qblur"` // (qblur)
+	Qblur typex.UFlt `json:"qblur" flag:"-qblur"` // (qblur)
 	//Quantizer curve blur
 
 	Qcomp typex.Flt `json:"qcomp" flag:"-qcomp"` //(qcomp)
@@ -73,35 +73,35 @@ type LIBX264 struct {
 	Tune Tune `json:"tune" flag:"-tune"` //(tune)
 	//Set tuning of the encoding params.
 
-	Profile int `json:"profile" flag:"-profile"` //(profile)
+	Profile typex.Profile `json:"profile" flag:"-profile"` //(profile)
 	//Set profile restrictions.
 
-	Fastfirstpass int `json:"fastfirstpass" flag:"-fastfirstpass"` //
+	Fastfirstpass typex.UBool `json:"fastfirstpass" flag:"-fastfirstpass"` //
 	//Enable fast settings when encoding first pass, when set to 1. When set to 0, it has the same effect of x264s --slow-firstpass option.
 
 	Crf typex.UI8 `json:"crf" flag:"-crf"` // (crf)
 	//Set the quality for constant quality mode.
 
-	CrfMax int `json:"crf_max" flag:"-crf_max"` //(crf-max)
+	CrfMax typex.UFlt `json:"crf_max" flag:"-crf_max"` //(crf-max)
 	//In CRF mode, prevents VBV from lowering quality beyond this point.
 
 	Qp typex.Level `json:"qp" flag:"-qp"` //(qp)
 	//Set constant quantization rate control method parameter.
 
-	AqMode     AqMode `json:"aq-mode" flag:"-aq-mode"`         //(aq-mode)
-	AqStrength int    `json:"aq-strength" flag:"-aq-strength"` //(aq-strength)
+	AqMode     AqMode     `json:"aq-mode" flag:"-aq-mode"`         //(aq-mode)
+	AqStrength typex.UFlt `json:"aq-strength" flag:"-aq-strength"` //(aq-strength)
 	//Set AQ strength, reduce blocking and blurring in flat and textured areas.
 
-	Psy int `json:"psy" flag:"-psy"` //
+	Psy *typex.UBool `json:"psy" flag:"-psy"` //
 	//Use psychovisual optimizations when set to 1. When set to 0, it has the same effect as x264s --no-psy option.
 
-	PsyRd int `json:"psy-rd" flag:"-psy-rd"` // (psy-rd)
+	PsyRd typex.Format `json:"psy-rd" flag:"-psy-rd"` // (psy-rd)
 	//Set strength of psychovisual optimization, in psy-rd:psy-trellis format.
 
-	RcLookahead int `json:"rc-lookahead" flag:"-rc-lookahead"` //(rc-lookahead)
+	RcLookahead typex.Frames `json:"rc-lookahead" flag:"-rc-lookahead"` //(rc-lookahead)
 	//Set number of frames to look ahead for frametype and ratecontrol.
 
-	Weightb int `json:"weightb" flag:"-weightb"` //
+	Weightb *typex.UBool `json:"weightb" flag:"-weightb"` //
 	//Enable weighted prediction for B-frames when set to 1. When set to 0, it has the same effect as x264s --no-weightb option.
 
 	Weightp Weightp    `json:"weightp" flag:"-weightp"` //(weightp)
@@ -111,7 +111,7 @@ type LIBX264 struct {
 	IntraRefresh typex.Bool `json:"intra-refresh" flag:"-intra-refresh"` //(intra-refresh)
 	//Enable the use of Periodic Intra Refresh instead of IDR frames when set to 1.
 
-	AvcintraClass int `json:"avcintra-class" flag:"-avcintra-class"` // (class)
+	AvcintraClass typex.UI16 `json:"avcintra-class" flag:"-avcintra-class"` // (class)
 	//Configure the encoder to generate AVC-Intra. Valid values are 50, 100 and 200
 
 	BlurayCompat typex.Bool `json:"bluray-compat" flag:"-bluray-compat"` //(bluray-compat)
@@ -138,7 +138,7 @@ type LIBX264 struct {
 	Mbtree typex.Bool `json:"mbtree" flag:"-mbtree"` //
 	//Enable use macroblock tree ratecontrol when set to 1. When set to 0, it has the same effect as x264s --no-mbtree option.
 
-	Deblock string `json:"deblock" flag:"-deblock"` //(deblock)
+	Deblock typex.Param `json:"deblock" flag:"-deblock"` //(deblock)
 	//Set loop filter parameters, in alpha:beta form.
 
 	Cplxblur typex.Bool `json:"cplxblur" flag:"-cplxblur"` //(cplxblur)
@@ -151,13 +151,13 @@ type LIBX264 struct {
 	SliceMaxSize typex.Size `json:"slice-max-size" flag:"-slice-max-size"` //(slice-max-size)
 	//Set the limit of the size of each slice in bytes. If not specified but RTP payload size (ps) is specified, that is used.
 
-	Stats string `json:"stats" flag:"-stats"` //(stats)
+	Stats typex.String `json:"stats" flag:"-stats"` //(stats)
 	//Set the file name for multi-pass stats.
 
 	NalHrd NalHrd `json:"nal-hrd" flag:"-nal-hrd"` // (nal-hrd)
 	//Set signal HRD information (requires vbv-bufsize to be set). Possible values:
-	X264Opts   string `json:"x264opts" flag:"-x264opts"`       //opts
-	X264Params string `json:"x264-params" flag:"-x264-params"` // opts
+	X264Opts   typex.String `json:"x264opts" flag:"-x264opts"`       //opts
+	X264Params typex.Dict   `json:"x264-params" flag:"-x264-params"` // opts
 	//Override the x264 configuration using a :-separated list of key=value options.
 	A53CcBoolean typex.UBool `json:"a53cc" flag:"-a53cc"` //
 	//Import closed captions (which must be ATSC compatible format) into output. Only the mpeg2 and h264 decoders provide these. Default is 1 (on).

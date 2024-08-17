@@ -10,6 +10,6 @@ type Unix struct {
 	Timeout typex.MillisecondI `json:"timeout" flag:"-timeout"`
 	//Timeout in ms.
 
-	Listen bool `json:"listen" flag:"-listen"`
+	Listen typex.UBool `json:"listen" flag:"-listen"`
 	//Create the Unix socket in listening mode.
 }

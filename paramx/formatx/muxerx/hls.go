@@ -14,26 +14,26 @@ type HLS struct {
 	HlsListSize          *typex.Size                `json:"hls_list_size" flag:"-hls_list_size,5"`
 	HlsDeleteThreshold   typex.UNumber              `json:"hls_delete_threshold" flag:"-hls_delete_threshold,1"`
 	HlsStartNumberSource flagx.HlsStartNumberSource `json:"hls_start_number_source" flag:"-hls_start_number_source"`
-	StartNumber          typex.Size                 `json:"start_number" flag:"-start_number"`
+	StartNumber          typex.UNumber              `json:"start_number" flag:"-start_number"`
 	HlsAllowCache        typex.Bool                 `json:"hls_allow_cache" flag:"-hls_allow_cache"`
 	HlsBaseUrl           typex.Url                  `json:"hls_base_url" flag:"-hls_base_url"`
 	HlsSegmentFilename   typex.FileName             `json:"hls_segment_filename" flag:"-hls_segment_filename"`
 	Strftime             typex.UBool                `json:"strftime" flag:"-strftime"`             //Enable (1) or disable (0)
 	StrftimeMkdir        typex.UBool                `json:"strftime_mkdir" flag:"-strftime_mkdir"` //Enable (1) or disable (0)
-	HlsSegmentOptions    string                     `json:"hls_segment_options" flag:"-hls_segment_options"`
+	HlsSegmentOptions    typex.Dict                 `json:"hls_segment_options" flag:"-hls_segment_options"`
 	HlsEnc               typex.UBool                `json:"hls_enc" flag:"-hls_enc"` //Enable (1) or disable (0)
 	HlsEncKey            typex.Key                  `json:"hls_enc_key" flag:"-hls_enc_key"`
 	HlsEncKeyUrl         typex.Url                  `json:"hls_enc_key_url" flag:"-hls_enc_key_url"`
-	HlsEncIv             string                     `json:"hls_enc_iv" flag:"-hls_enc_iv"`
+	HlsEncIv             typex.Key                  `json:"hls_enc_iv" flag:"-hls_enc_iv"`
 	HlsSegmentType       HlsSegmentType             `json:"hls_segment_type" flag:"-hls_segment_type"`
 	HlsFmp4InitFilename  typex.FileName             `json:"hls_fmp4_init_filename" flag:"-hls_fmp4_init_filename"`
 	HlsFmp4InitResend    typex.UBool                `json:"hls_fmp4_init_resend" flag:"-hls_fmp4_init_resend"`
 	HlsFlags             flagx.HlsFlags             `json:"hls_flags" flag:"-hls_flags"`
 	HlsPlaylistType      flagx.HlsPlaylistType      `json:"hls_playlist_type" flag:"-hls_playlist_type"`
 	Method               flagx.HttpMethod           `json:"method" flag:"-method"`
-	HttpUserAgent        string                     `json:"http_user_agent" flag:"-http_user_agent"`
-	VarStreamMap         string                     `json:"var_stream_map" flag:"-var_stream_map"`
-	CcStreamMap          string                     `json:"cc_stream_map" flag:"-cc_stream_map"`
+	HttpUserAgent        typex.String               `json:"http_user_agent" flag:"-http_user_agent"`
+	VarStreamMap         typex.Param                `json:"var_stream_map" flag:"-var_stream_map"`
+	CcStreamMap          typex.Param                `json:"cc_stream_map" flag:"-cc_stream_map"`
 	MasterPlName         typex.Name                 `json:"master_pl_name" flag:"-master_pl_name"`
 	MasterPlPublishRate  typex.UNumber              `json:"master_pl_publish_rate" flag:"-master_pl_publish_rate"`
 	HttpPersistent       typex.UBool                `json:"http_persistent" flag:"-http_persistent"`

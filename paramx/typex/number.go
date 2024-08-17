@@ -3,7 +3,7 @@ package typex
 type Level = UI8
 type LevelI8 = I8
 type LevelUI16 = UI16
-type UFloat32 = Flt
+type UFlt = Flt
 type FLT0_1 = Flt // 0.0~1.0
 
 type IntRef = UI16
@@ -19,7 +19,7 @@ type InputIndex = UNumber
 type Channels = UNumber
 type BidirRefine = UI8 //4
 
-type PercentF = UFloat32
+type PercentF = UFlt
 type PercentI = UI8
 type Distance = Flt
 

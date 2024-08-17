@@ -19,7 +19,7 @@ type PRORES struct {
 	MbsPerSlice typex.Level `json:"mbs_per_slice" flag:"-mbs_per_slice"`
 	//Number of macroblocks in each slice (1-8); the default value (8) should be good in almost all situations.
 
-	Vendor string `json:"vendor" flag:"-vendor"`
+	Vendor typex.Vendor `json:"vendor" flag:"-vendor"`
 	//Override the 4-byte vendor ID. A custom vendor ID like apl0 would claim the stream was produced by the Apple encoder.
 
 	AlphaBits typex.Level `json:"alpha_bits" flag:"-alpha_bits"`

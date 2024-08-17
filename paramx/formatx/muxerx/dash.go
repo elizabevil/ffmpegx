@@ -7,13 +7,13 @@ import (
 
 // // 21.29 dash DASH
 type DASH struct {
-	AdaptationSets  string          `json:"adaptation_sets" flag:"-adaptation_sets "`
+	AdaptationSets  typex.Param     `json:"adaptation_sets" flag:"-adaptation_sets "`
 	DashSegmentType DashSegmentType `json:"dash_segment_type" flag:"-dash_segment_type  "`
 
 	ExtraWindowSize typex.Size `json:"extra_window_size" flag:"-extra_window_size"`
 	//Set the maximum number of segments kept outside of the manifest before removing from disk.
 
-	FormatOptions string `json:"format_options" flag:"-format_options"`
+	FormatOptions typex.Dict `json:"format_options" flag:"-format_options"`
 	//Set container format (mp4/webm) options using a:-separated list of key = value parameters.Values containing: special characters must be escaped.
 
 	FragDuration typex.SecondI `json:"frag_duration" flag:"-frag_duration"`
@@ -30,13 +30,13 @@ type DASH struct {
 	HlsPlaylist typex.UBool `json:"hls_playlist" flag:"-hls_playlist"`
 	//Generate HLS playlist files.The master playlist is generated with filename specified by the hls_master_name option.One media playlist file is generated for each stream with filenames media_0.m3u8, media_1.m3u8, etc.
 
-	HttpOpts string `json:"http_opts" flag:"-http_opts"`
+	HttpOpts typex.Dict `json:"http_opts" flag:"-http_opts"`
 	//Specify a list of:-separated key = value options to pass to the underlying HTTP protocol.Applicable only for HTTP output.
 
 	HttpPersistent typex.UBool `json:"http_persistent" flag:"-http_persistent"`
 	//Use persistent HTTP connections.Applicable only for HTTP output.
 
-	HttpUserAgent string `json:"http_user_agent" flag:"-http_user_agent"`
+	HttpUserAgent typex.String `json:"http_user_agent" flag:"-http_user_agent"`
 	//Override User-Agent field in HTTP header.Applicable only for HTTP output.
 
 	IgnoreIoErrors typex.UBool `json:"ignore_io_errors" flag:"-ignore_io_errors"`

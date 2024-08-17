@@ -2,6 +2,7 @@ package protocolx
 
 import (
 	"github.com/elizabevil/ffmpegx/paramx/parsex"
+	"github.com/elizabevil/ffmpegx/paramx/typex"
 	"net/url"
 )
 
@@ -9,16 +10,16 @@ import (
 //sap://destination[:port][?options]
 
 type Sap struct {
-	AnnounceAddr string `json:"announce_addr"` // address
+	AnnounceAddr typex.Addr `json:"announce_addr"` // address
 	//Specify the destination IP address for sending the announcements to. If omitted, the announcements are sent to the commonly used SAP announcement multicast address 224.2.127.254 (sap.mcast.net), or ff0e::2:7ffe if destination is an IPv6 address.
 
-	AnnouncePort int `json:"announce_port"` // port
+	AnnouncePort typex.Port `json:"announce_port"` // port
 	//Specify the port to send the announcements on, defaults to 9875 if not specified.
 
-	Ttl int `json:"ttl"` // ttl
+	Ttl typex.UTime `json:"ttl"` // ttl
 	//Specify the time to live value for the announcements and RTP packets, defaults to 255.
 
-	SamePort byte `json:"same_port"` // 0|1
+	SamePort typex.UBool `json:"same_port"` // 0|1
 	//If set to 1, send all RTP streams on the same port pair.
 	//If zero (the default), all streams are sent on unique ports, with each stream on a port 2 numbers higher than the previous. VLC/Live555 requires this to be set to 1, to be able to receive the stream. The RTP stack in libavformat for receiving requires all streams to be sent on unique ports.
 }

@@ -4,10 +4,10 @@ import "github.com/elizabevil/ffmpegx/paramx/typex"
 
 // // 21.57 matroska MATROSKA
 type MATROSKA struct {
-	Title bool `json:"title" flag:"-title"`
+	Title typex.Name `json:"title" flag:"-title"`
 	//Set title name provided to a single track. This gets mapped to the FileDescription element for a stream written as attachment.
 
-	Language string `json:"language" flag:"-language"`
+	Language typex.Dict `json:"language" flag:"-language"`
 	//Specify the language of the track in the Matroska languages form.
 
 	//The language can be either the 3 letters bibliographic ISO-639-2 (ISO 639-2/B) form (like "fre" for French), or a language code mixed with a country code for specialities in languages (like "fre-ca" for Canadian French).

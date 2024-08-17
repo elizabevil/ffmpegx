@@ -9,7 +9,7 @@ import (
 // 24.33 rtp
 // RTP The required syntax for an RTP URL is: rtp://hostname[:port][?option=val...]
 type RTP struct {
-	Ttl int `json:"ttl"` // =n
+	Ttl typex.UI8 `json:"ttl"` // =n
 	//Set the TTL (Time-To-Live) value (for multicast only).
 
 	RtcpPort typex.Port `json:"rtcpport"` // =n

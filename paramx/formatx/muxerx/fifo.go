@@ -10,10 +10,10 @@ type FIFO struct {
 	DropPktsOnOverflow typex.UBool `json:"drop_pkts_on_overflow" flag:"-drop_pkts_on_overflow"`
 	//If set to true, in case the fifo queue fills up, packets will be dropped rather than blocking the encoder. This makes it possible to continue streaming without delaying the input, at the cost of omitting part of the stream. By default this option is set to false, so in such cases the encoder will be blocked until the muxer processes some of the packets and none of them is lost.
 
-	FifoFormat string `json:"fifo_format" flag:"-fifo_format"`
+	FifoFormat typex.Format `json:"fifo_format" flag:"-fifo_format"`
 	//Specify the format name. Useful if it cannot be guessed from the output name suffix.
 
-	FormatOpts string `json:"format_opts" flag:"-format_opts"`
+	FormatOpts typex.Dict `json:"format_opts" flag:"-format_opts"`
 	//Specify format options for the underlying muxer. Muxer options can be specified as a list of key=value pairs separated by ’:’.
 
 	MaxRecoveryAttempts typex.Count `json:"max_recovery_attempts" flag:"-max_recovery_attempts"`

@@ -14,7 +14,7 @@ type HTTP struct {
 	ChunkedPost typex.UBool `json:"chunked_post" flag:"-chunked_post"`
 	//If set to 1 use chunked Transfer-Encoding for posts, default is 1.
 
-	HttpProxy string `json:"http_proxy" flag:"-http_proxy"`
+	HttpProxy typex.Url `json:"http_proxy" flag:"-http_proxy"`
 	//set HTTP proxy to tunnel through e.g. http://example.com:1234
 
 	Headers string `json:"headers" flag:"-headers"`
@@ -38,7 +38,7 @@ type HTTP struct {
 	MimeType string `json:"mime_type" flag:"-mime_type"`
 	//Export the MIME type.
 
-	HttpVersion bool `json:"http_version" flag:"-http_version"`
+	HttpVersion string `json:"http_version" flag:"-http_version"`
 	//Exports the HTTP response version number. Usually "1.0" or "1.1".
 
 	Cookies string `json:"cookies" flag:"-cookies"`
@@ -93,22 +93,22 @@ type HTTP struct {
 	ReconnectStreamed typex.UBool `json:"reconnect_streamed" flag:"-reconnect_streamed"`
 	//If set then even streamed/non seekable streams will be reconnected on errors.
 
-	ReconnectDelayMax bool `json:"reconnect_delay_max" flag:"-reconnect_delay_max"`
+	ReconnectDelayMax typex.SecondI `json:"reconnect_delay_max" flag:"-reconnect_delay_max"`
 	//Set the maximum delay in seconds after which to give up reconnecting.
 
-	ReconnectMaxRetries bool `json:"reconnect_max_retries" flag:"-reconnect_max_retries"`
+	ReconnectMaxRetries typex.UNumber `json:"reconnect_max_retries" flag:"-reconnect_max_retries"`
 	//Set the maximum number of times to retry a connection. Default unset.
 
-	ReconnectDelayTotalMax bool `json:"reconnect_delay_total_max" flag:"-reconnect_delay_total_max"`
+	ReconnectDelayTotalMax typex.SecondI `json:"reconnect_delay_total_max" flag:"-reconnect_delay_total_max"`
 	//Set the maximum total delay in seconds after which to give up reconnecting.
 
-	RespectRetryAfter bool `json:"respect_retry_after" flag:"-respect_retry_after"`
+	RespectRetryAfter *typex.UBool `json:"respect_retry_after" flag:"-respect_retry_after"`
 	//If enabled, and a Retry-After header is encountered, its requested reconnection delay will be honored, rather than using exponential backoff. Useful for 429 and 503 errors. Default enabled.
 
 	Listen typex.UBool `json:"listen" flag:"-listen"`
 	//If set to 1 enables experimental HTTP server. This can be used to send data when used as an output option, or read data from a client with HTTP POST when used as an input option. If set to 2 enables experimental multi-client HTTP server. This is not yet implemented in ffmpeg.c and thus must not be used as a command line option.
 
-	Resource bool `json:"resource" flag:"-resource"`
+	Resource typex.Url `json:"resource" flag:"-resource"`
 	//The resource requested by a client, when the experimental HTTP server is in use.
 
 	ReplyCode typex.Code `json:"reply_code" flag:"-reply_code"`

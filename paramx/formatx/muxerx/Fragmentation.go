@@ -11,7 +11,7 @@ type FRAGMENTATION struct {
 	EmptyHdlrName typex.UBool `json:"empty_hdlr_name" flag:"-empty_hdlr_name"`
 	//Enable to skip writing the name inside a hdlr box.Default is false.
 
-	EncryptionKey string `json:"encryption_key" flag:"-encryption_key"`
+	EncryptionKey typex.Key `json:"encryption_key" flag:"-encryption_key"`
 	//set the media encryption key in hexadecimal format
 
 	EncryptionKid typex.ID `json:"encryption_kid" flag:"-encryption_kid"`

@@ -19,6 +19,6 @@ type IMAGE2 struct {
 	AtomicWriting typex.UBool `json:"atomic_writing" flag:"-atomic_writing"`
 	//Write output to a temporary file, which is renamed to target filename once writing is completed. Default is disabled.
 
-	ProtocolOpts string `json:"protocol_opts" flag:"-protocol_opts"`
+	ProtocolOpts typex.Param `json:"protocol_opts" flag:"-protocol_opts"`
 	//Set protocol options as a :-separated list of key=value parameters. Values containing the : special character must be escaped.
 }

@@ -13,7 +13,7 @@ type KMSGRAB struct {
 	Format typex.Format `json:"format" flag:"-format"`
 	//Pixel format of the framebuffer. This can be autodetected if you are running Linux 5.7 or later, but needs to be provided for earlier versions. Defaults to bgr0, which is the most common format used by the Linux console and Xorg X server.
 
-	FormatModifier int `json:"format_modifier" flag:"-format_modifier"`
+	FormatModifier typex.UNumber `json:"format_modifier" flag:"-format_modifier"`
 	//Format modifier to signal on output frames. This is necessary to import correctly into  APIs. It can be autodetected if you are running Linux 5.7 or later, but will need to be provided explicitly when needed in earlier versions. See the libdrm documentation for possible values.
 
 	CrtcId typex.ID `json:"crtc_id" flag:"-crtc_id"`

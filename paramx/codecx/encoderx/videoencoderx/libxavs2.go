@@ -27,7 +27,7 @@ type Libxavs2 struct {
 
 	LogLevel typex.Level `json:"log_level" flag:"-log_level"` //Set the log level from -1 to 3 (default 0). -1: none, 0: error, 1: warning, 2: info, 3: debug.
 
-	Xavs2Params string `json:"xavs2-params" flag:"-xavs2-params"` //Set xavs2 options using a list of key=value couples separated by ":".
+	Xavs2Params typex.Dict `json:"xavs2-params" flag:"-xavs2-params"` //Set xavs2 options using a list of key=value couples separated by ":".
 }
 
 //ffmpeg -i input -c:v libxavs2 -xavs2-params RdoqLevel=0 output.avs2

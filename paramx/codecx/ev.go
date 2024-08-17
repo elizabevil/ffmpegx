@@ -13,7 +13,7 @@ type EV struct {
 
 	Qcomp typex.Flt `json:"qcomp" flag:"-qcomp"` // (encoding, video)
 
-	Qblur typex.UFloat32 `json:"qblur" flag:"-qblur"` // (encoding, video)
+	Qblur typex.UFlt `json:"qblur" flag:"-qblur"` // (encoding, video)
 
 	Qmin typex.Quantizer `json:"qmin" flag:"-qmin"` // (encoding, video)
 
@@ -72,7 +72,7 @@ type EV struct {
 
 	MeRange typex.Number `json:"me_range" flag:"-me_range"` // (encoding, video)
 
-	Mbd int `json:"mbd" flag:"-mbd"` // (encoding, video)
+	Mbd flagx.Mbd `json:"mbd" flag:"-mbd"` // (encoding, video)
 
 	RcInitOccupancy typex.Number `json:"rc_init_occupancy" flag:"-rc_init_occupancy"` // (encoding, video)
 
@@ -92,9 +92,9 @@ type EV struct {
 
 	Mv0Threshold typex.Size `json:"mv0_threshold" flag:"-mv0_threshold"` // (encoding, video)
 
-	RcMaxVbvUse typex.UFloat32 `json:"rc_max_vbv_use" flag:"-rc_max_vbv_use"` // (encoding, video)
+	RcMaxVbvUse typex.UFlt `json:"rc_max_vbv_use" flag:"-rc_max_vbv_use"` // (encoding, video)
 
-	RcMinVbvUse typex.UFloat32 `json:"rc_min_vbv_use" flag:"-rc_min_vbv_use"` // (encoding, video)
+	RcMinVbvUse typex.UFlt `json:"rc_min_vbv_use" flag:"-rc_min_vbv_use"` // (encoding, video)
 
 	Slices typex.Size `json:"slices" flag:"-slices"` // (encoding, video)
 

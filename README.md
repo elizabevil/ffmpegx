@@ -100,8 +100,6 @@ fmt.Println(YourHls{}.Args()) //see args
 paramx.BuildIArgInterface(input, args, YourHls{}, output) // complete args
 ```
 
-
-
 - Run
 
 ```go
@@ -114,8 +112,6 @@ transcode.Args = makeParams() // set ffmpeg/ffplay args
 transcode.Cmd()   //*exec.Cmd 
 
 ```
-
-
 
 - Get Metadata
 
@@ -151,8 +147,6 @@ fmt.Println(metadata.Streams) // println Streams
 
 ```
 
-
-
 - Audio Channel_layout
 
 ```go
@@ -161,9 +155,7 @@ layout := streams[0].GetChannelLayout() //{stereo {1 2 3}}
 fmt.Println(metadatax.ChannelNames[layout.Layout.Mask]) //{LFE low frequency}
 ```
 
-
-
-- Use Pipeline  Run
+- Use Pipeline Run
 
 ```go
 
@@ -212,7 +204,5 @@ fmt.Println(typex.NewVideoSize(1024, 720))//720x1024
 fmt.Println(typex.NewRatio(1024, 720))//720:1024
 fmt.Println(typex.NewRate(25, 1))  //25/1
 ```
-
-
 
 - More examples ==>see examples dir 

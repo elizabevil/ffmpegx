@@ -10,8 +10,6 @@ type I16 int16
 type UI8 uint8
 type I8 int8
 
-type UFlt = Flt
-
 type StreamSpecifier struct {
 	K string
 	V string

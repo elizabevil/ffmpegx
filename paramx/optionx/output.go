@@ -28,7 +28,7 @@ type Output struct {
 	//5.7 Audio Options
 	Aframes typex.Frames      `json:"aframes" flag:"-aframes"`
 	Aq      string            `json:"aq" flag:"-aq"` //This is an alias for filter:a, see the filter option.
-	Af      typex.Filtergraph `json:"af" flag:"-af"`
+	Af      typex.FilterGraph `json:"af" flag:"-af"`
 	//5.8 Advanced Audio options
 	Atag typex.Tag `json:"atag" flag:"-atag"` //Force audio tag/fourcc. This is an alias for -tag:a.
 	Map  []string  `json:"map" flag:"-map"`

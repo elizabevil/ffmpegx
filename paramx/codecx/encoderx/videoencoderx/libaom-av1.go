@@ -45,8 +45,8 @@ type LibaomAv1 struct {
 	LagInFrames typex.UNumber `json:"lag-in-frames" flag:"-lag-in-frames"`
 	//Set the maximum number of frames which the encoder may keep in flight at any one time for lookahead purposes. Defaults to the internal default of the library.
 
-	ErrorResilience string    `json:"error-resilience" flag:"-error-resilience"`
-	Crf             typex.UI8 `json:"crf" flag:"-crf"`
+	ErrorResilience typex.Number `json:"error-resilience" flag:"-error-resilience"`
+	Crf             typex.UI8    `json:"crf" flag:"-crf"`
 	//Set the quality/size tradeoff for constant-quality int(no bitrate target) and constrained-quality int(with maximum bitrate target) modes. Valid range is 0 to 63, higher numbers indicating lower quality and smaller output size. Only used if set; by default only the bitrate target is used.
 
 	StaticThresh typex.UNumber `json:"static-thresh" flag:"-static-thresh"`
@@ -85,52 +85,52 @@ type LibaomAv1 struct {
 	RowMt typex.Bool `json:"row-mt" flag:"-row-mt"` //(Requires libaom >= 1.0.0-759-g90a15f4f2)
 	//Enable row based multi-threading. Disabled by default.
 
-	EnableCdef typex.Bool `json:"enable-cdef" flag:"-enable-cdef"` //(boolean)
+	EnableCdef typex.UBool `json:"enable-cdef" flag:"-enable-cdef"` //(boolean)
 	//Enable Constrained Directional Enhancement Filter. The libaom-av1 encoder enables CDEF by default.
 
-	EnableRestoration typex.Bool `json:"enable-restoration" flag:"-enable-restoration"` //(boolean)
+	EnableRestoration typex.UBool `json:"enable-restoration" flag:"-enable-restoration"` //(boolean)
 	//Enable Loop Restoration Filter. Default is true for libaom-av1.
 
-	EnableGlobalMotion typex.Bool `json:"enable-global-motion" flag:"-enable-global-motion"` //(boolean)
+	EnableGlobalMotion typex.UBool `json:"enable-global-motion" flag:"-enable-global-motion"` //(boolean)
 	//Enable the use of global motion for block prediction. Default is true.
 
-	EnableIntrabc typex.Bool `json:"enable-intrabc" flag:"-enable-intrabc"` //(boolean)
+	EnableIntrabc typex.UBool `json:"enable-intrabc" flag:"-enable-intrabc"` //(boolean)
 	//Enable block copy mode for intra block prediction. This mode is useful for screen content. Default is true.
 
-	EnableRectPartitions typex.Bool `json:"enable-rect-partitions" flag:"-enable-rect-partitions"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableRectPartitions typex.UBool `json:"enable-rect-partitions" flag:"-enable-rect-partitions"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable rectangular partitions. Default is true.
 
-	Enable1To4Partitions typex.Bool `json:"enable-1to4-partitions" flag:"-enable-1to4-partitions"` //(boolean) int (Requires libaom >= v2.0.0)
+	Enable1To4Partitions typex.UBool `json:"enable-1to4-partitions" flag:"-enable-1to4-partitions"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable 1:4/4:1 partitions. Default is true.
 
-	EnableAbPartitions typex.Bool `json:"enable-ab-partitions" flag:"-enable-ab-partitions"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableAbPartitions typex.UBool `json:"enable-ab-partitions" flag:"-enable-ab-partitions"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable AB shape partitions. Default is true.
 
-	EnableAngleDelta typex.Bool `json:"enable-angle-delta" flag:"-enable-angle-delta"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableAngleDelta typex.UBool `json:"enable-angle-delta" flag:"-enable-angle-delta"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable angle delta intra prediction. Default is true.
 
-	EnableCflIntra typex.Bool `json:"enable-cfl-intra" flag:"-enable-cfl-intra"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableCflIntra typex.UBool `json:"enable-cfl-intra" flag:"-enable-cfl-intra"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable chroma predicted from luma intra prediction. Default is true.
 
-	EnableFilterIntra typex.Bool `json:"enable-filter-intra" flag:"-enable-filter-intra"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableFilterIntra typex.UBool `json:"enable-filter-intra" flag:"-enable-filter-intra"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable filter intra predictor. Default is true.
 
-	EnableIntraEdgeFilter typex.Bool `json:"enable-intra-edge-filter" flag:"-enable-intra-edge-filter"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableIntraEdgeFilter typex.UBool `json:"enable-intra-edge-filter" flag:"-enable-intra-edge-filter"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable intra edge filter. Default is true.
 
-	EnableSmoothIntra typex.Bool `json:"enable-smooth-intra" flag:"-enable-smooth-intra"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableSmoothIntra typex.UBool `json:"enable-smooth-intra" flag:"-enable-smooth-intra"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable smooth intra prediction mode. Default is true.
 
-	EnablePaethIntra typex.Bool `json:"enable-paeth-intra" flag:"-enable-paeth-intra"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnablePaethIntra typex.UBool `json:"enable-paeth-intra" flag:"-enable-paeth-intra"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable paeth predictor in intra prediction. Default is true.
 
-	EnablePalette typex.Bool `json:"enable-palette" flag:"-enable-palette"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnablePalette typex.UBool `json:"enable-palette" flag:"-enable-palette"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable palette prediction mode. Default is true.
 
-	EnableFlipIdtx typex.Bool `json:"enable-flip-idtx" flag:"-enable-flip-idtx"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableFlipIdtx typex.UBool `json:"enable-flip-idtx" flag:"-enable-flip-idtx"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable extended transform type, including FLIPADST_DCT, DCT_FLIPADST, FLIPADST_FLIPADST, ADST_FLIPADST, FLIPADST_ADST, IDTX, V_DCT, H_DCT, V_ADST, H_ADST, V_FLIPADST, H_FLIPADST. Default is true.
 
-	EnableTx64 typex.Bool `json:"enable-tx64" flag:"-enable-tx64"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableTx64 typex.UBool `json:"enable-tx64" flag:"-enable-tx64"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable 64-pt transform. Default is true.
 
 	ReducedTxTypeSet typex.Bool `json:"reduced-tx-type-set" flag:"-reduced-tx-type-set"` //(boolean) int (Requires libaom >= v2.0.0)
@@ -145,40 +145,40 @@ type LibaomAv1 struct {
 	UseIntraDefaultTxOnly typex.Bool `json:"use-intra-default-tx-only" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Use Default-transform only for INTRA modes. Default is false.
 
-	EnableRefFrameMvs typex.Bool `json:"enable-ref-frame-mvs" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableRefFrameMvs typex.UBool `json:"enable-ref-frame-mvs" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable temporal mv prediction. Default is true.
 
-	EnableReducedReferenceSet typex.Bool `json:"enable-reduced-reference-set" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableReducedReferenceSet typex.UBool `json:"enable-reduced-reference-set" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Use reduced set of single and compound references. Default is false.
 
-	EnableObmc typex.Bool `json:"enable-obmc" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableObmc typex.UBool `json:"enable-obmc" flag:"-g"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable obmc. Default is true.
 
-	EnableDualFilter typex.Bool `json:"enable-dual-filter" flag:"-enable-dual-filter"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableDualFilter typex.UBool `json:"enable-dual-filter" flag:"-enable-dual-filter"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable dual filter. Default is true.
 
-	EnableDiffWtdComp typex.Bool `json:"enable-diff-wtd-comp" flag:"-enable-diff-wtd-comp"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableDiffWtdComp typex.UBool `json:"enable-diff-wtd-comp" flag:"-enable-diff-wtd-comp"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable difference-weighted compound. Default is true.
 
-	EnableDistWtdComp typex.Bool `json:"enable-dist-wtd-comp" flag:"-enable-dist-wtd-comp"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableDistWtdComp typex.UBool `json:"enable-dist-wtd-comp" flag:"-enable-dist-wtd-comp"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable distance-weighted compound. Default is true.
 
-	EnableOnesidedComp typex.Bool `json:"enable-onesided-comp" flag:"-enable-onesided-comp"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableOnesidedComp typex.UBool `json:"enable-onesided-comp" flag:"-enable-onesided-comp"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable one sided compound. Default is true.
 
-	EnableInterinterWedge typex.Bool `json:"enable-interinter-wedge" flag:"-enable-interinter-wedge"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableInterinterWedge typex.UBool `json:"enable-interinter-wedge" flag:"-enable-interinter-wedge"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable interinter wedge compound. Default is true.
 
-	EnableInterintraWedge typex.Bool `json:"enable-interintra-wedge" flag:"-enable-interintra-wedge"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableInterintraWedge typex.UBool `json:"enable-interintra-wedge" flag:"-enable-interintra-wedge"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable interintra wedge compound. Default is true.
 
-	EnableMaskedComp typex.Bool `json:"enable-masked-comp" flag:"-enable-masked-comp"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableMaskedComp typex.UBool `json:"enable-masked-comp" flag:"-enable-masked-comp"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable masked compound. Default is true.
 
-	EnableInterintraComp typex.Bool `json:"enable-interintra-comp" flag:"-enable-interintra-comp"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableInterintraComp typex.UBool `json:"enable-interintra-comp" flag:"-enable-interintra-comp"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable interintra compound. Default is true.
 
-	EnableSmoothInterintra typex.Bool `json:"enable-smooth-interintra" flag:"-enable-smooth-interintra"` //(boolean) int (Requires libaom >= v2.0.0)
+	EnableSmoothInterintra typex.UBool `json:"enable-smooth-interintra" flag:"-enable-smooth-interintra"` //(boolean) int (Requires libaom >= v2.0.0)
 	//Enable smooth interintra mode. Default is true.
 
 	AomParams string `json:"aom-params" flag:"-aom-params"`

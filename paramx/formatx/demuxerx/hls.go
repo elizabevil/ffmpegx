@@ -11,10 +11,10 @@ type HLS struct {
 	LiveStartIndex typex.Index `json:"live_start_index" flag:"-live_start_index"`
 	//segment index to start live streams at (negative values are from the end).
 
-	PreferXStart bool `json:"prefer_x_start" flag:"-prefer_x_start"`
+	PreferXStart typex.UBool `json:"prefer_x_start" flag:"-prefer_x_start"`
 	//prefer to use #EXT-X-START if it’s in playlist instead of live_start_index.
 
-	AllowedExtensions string `json:"allowed_extensions" flag:"-allowed_extensions"`
+	AllowedExtensions typex.List `json:"allowed_extensions" flag:"-allowed_extensions"`
 	//’,’ separated list of file extensions that hls is allowed to access.
 
 	MaxReload typex.Size `json:"max_reload" flag:"-max_reload"`
@@ -32,7 +32,7 @@ type HLS struct {
 	HttpSeekable *typex.Bool `json:"http_seekable" flag:"-http_seekable,-1"`
 	//Use HTTP partial requests for downloading HTTP segments. 0 = disable, 1 = enable, -1 = auto, Default is auto.
 
-	SegFormatOptions string `json:"seg_format_options" flag:"-seg_format_options"`
+	SegFormatOptions typex.Dict `json:"seg_format_options" flag:"-seg_format_options"`
 	//Set options for the demuxer of media segments using a list of key=value pairs separated by :.
 
 	SegMaxRetry typex.Size `json:"seg_max_retry" flag:"-seg_max_retry"`

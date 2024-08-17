@@ -80,7 +80,7 @@ type QsvAv1 struct {
 	BStrategy typex.Bool `json:"b_strategy" flag:"-b_strategy"`
 	//This option controls usage of B frames as reference.
 
-	Extbrc int `json:"extbrc" flag:"-extbrc"`
+	Extbrc typex.UBool `json:"extbrc" flag:"-extbrc"`
 	//Extended bitrate control.
 
 	LookAheadDepth typex.Depth `json:"look_ahead_depth" flag:"-look_ahead_depth"`

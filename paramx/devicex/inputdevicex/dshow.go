@@ -44,7 +44,7 @@ type Dshow struct {
 	AudioBufferSize typex.Size `json:"audio_buffer_size" flag:"-audio_buffer_size"`
 	//Set audio device buffer size in milliseconds (which can directly impact latency, depending on the device). Defaults to using the audio device’s default buffer size (typically some multiple of 500ms). Setting this value too low can degrade performance. See also http://msdn.microsoft.com/en-us/library/windows/desktop/dd377582(v=vs.85).aspx
 
-	VideoPinName typex.Number `json:"video_pin_name" flag:"-video_pin_name"`
+	VideoPinName typex.Name `json:"video_pin_name" flag:"-video_pin_name"`
 	//Select video capture pin to use by name or alternative name.
 
 	AudioPinName typex.Name `json:"audio_pin_name" flag:"-audio_pin_name"`
@@ -74,16 +74,16 @@ type Dshow struct {
 	ShowAnalogTvTunerAudioDialog typex.UBool `json:"show_analog_tv_tuner_audio_dialog" flag:"-show_analog_tv_tuner_audio_dialog"`
 	//If set to true, before capture starts, popup a display dialog to the end user, allowing them to manually modify TV audio (like mono vs. stereo, Language A,B or C).
 
-	AudioDeviceLoad bool `json:"audio_device_load" flag:"-audio_device_load"`
+	AudioDeviceLoad typex.UBool `json:"audio_device_load" flag:"-audio_device_load"`
 	//Load an audio capture filter device from file instead of searching it by name. It may load additional parameters too, if the filter supports the serialization of its properties to. To use this an audio capture source has to be specified, but it can be anything even fake one.
 
-	AudioDeviceSave bool `json:"audio_device_save" flag:"-audio_device_save"`
+	AudioDeviceSave typex.UBool `json:"audio_device_save" flag:"-audio_device_save"`
 	//Save the currently used audio capture filter device and its parameters (if the filter supports it) to a file. If a file with the same name exists it will be overwritten.
 
-	VideoDeviceLoad bool `json:"video_device_load" flag:"-video_device_load"`
+	VideoDeviceLoad typex.UBool `json:"video_device_load" flag:"-video_device_load"`
 	//Load a video capture filter device from file instead of searching it by name. It may load additional parameters too, if the filter supports the serialization of its properties to. To use this a video capture source has to be specified, but it can be anything even fake one.
 
-	VideoDeviceSave bool `json:"video_device_save" flag:"-video_device_save"`
+	VideoDeviceSave typex.UBool `json:"video_device_save" flag:"-video_device_save"`
 	//Save the currently used video capture filter device and its parameters (if the filter supports it) to a file. If a file with the same name exists it will be overwritten.
 
 	UseVideoDeviceTimestamps typex.BoolStr `json:"use_video_device_timestamps" flag:"-use_video_device_timestamps"`

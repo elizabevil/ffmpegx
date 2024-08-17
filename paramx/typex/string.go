@@ -1,7 +1,10 @@
 package typex
 
-type DICT = String
+type Dict = String
 type Name = String
+type Description = String
+type Profile = String
+type Vendor = String
 type Url = Name
 type FileName = Name
 type Entries = Name
@@ -30,7 +33,7 @@ type Func = String
 type Binary = String
 type Disposition = String
 type OptionsList = String
-type ParamsKv = String
+type Param = String
 
 type Hexadecimal = String
 type Limit = Number
