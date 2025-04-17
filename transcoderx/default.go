@@ -1,7 +1,7 @@
 package transcoderx
 
 import (
-	"encoding/json"
+	"github.com/bytedance/sonic"
 	"github.com/elizabevil/ffmpegx/metadatax"
 	"os/exec"
 )
@@ -14,7 +14,7 @@ type Unmarshal struct {
 }
 
 func (u Unmarshal) Unmarshal(data []byte, v any) error {
-	return json.Unmarshal(data, &v)
+	return sonic.Unmarshal(data, &v)
 }
 
 var NewProgressMaker = metadatax.NewDefaultProgress

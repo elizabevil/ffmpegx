@@ -4,16 +4,16 @@ import "github.com/elizabevil/ffmpegx/paramx/typex"
 
 // Metadata ...
 type Metadata struct {
-	ProgramVersion   ProgramVersion   `json:"program_version,omitempty"`
-	LibraryVersions  []LibraryVersion `json:"library_versions,omitempty"`
-	PixelFormats     []PixelFormat    `json:"pixel_formats,omitempty"`
-	PacketsAndFrames []PacketAndFrame `json:"packets_and_frames,omitempty"`
-	Packets          []Packet         `json:"packets,omitempty"`
-	Frames           []Frame          `json:"frames,omitempty"`
-	Programs         []Program        `json:"programs,omitempty"`
-	Format           Format           `json:"format,omitempty"`
-	Chapters         []Chapter        `json:"chapters,omitempty"`
-	Streams          []Stream         `json:"streams,omitempty"`
+	ProgramVersion   ProgramVersion   `json:"program_version,omitempty" toml:"program_version,omitempty"`
+	LibraryVersions  []LibraryVersion `json:"library_versions,omitempty" toml:"library_versions,omitempty"`
+	PixelFormats     []PixelFormat    `json:"pixel_formats,omitempty" toml:"pixel_formats,omitempty"`
+	PacketsAndFrames []PacketAndFrame `json:"packets_and_frames,omitempty" toml:"packets_and_frames,omitempty"`
+	Packets          []Packet         `json:"packets,omitempty" toml:"packets,omitempty"`
+	Frames           []Frame          `json:"frames,omitempty" toml:"frames,omitempty"`
+	Programs         []Program        `json:"programs,omitempty" toml:"programs,omitempty"`
+	Format           Format           `json:"format,omitempty" toml:"format,omitempty"`
+	Chapters         []Chapter        `json:"chapters,omitempty" toml:"chapters,omitempty"`
+	Streams          []Stream         `json:"streams,omitempty" toml:"streams,omitempty"`
 }
 
 func (m Metadata) GetFormat() Format {

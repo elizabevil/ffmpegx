@@ -1,26 +1,35 @@
 package metadatax
 
 import (
-	"bufio"
 	"context"
 	"fmt"
-	"io"
 	"os"
 	"regexp"
-	"strings"
 )
 
-type PlayHandle = func(progress FFplay)
-type FFplayCtxHandle = func(ctx context.Context, handle func(process *os.Process), handles ...PlayHandle) error
+type FFPlayHandle = func(progress FFplay)
+type FFplayCtxHandle = func(ctx context.Context, handle func(process *os.Process), handles ...FFPlayHandle) error
+
 type FFplay struct {
-	MasterClock float32 `json:"master_clock"`
-	Key         string  `json:"key"`
-	Diff        float32 `json:"diff"`
-	Fd          int     `json:"fd"`
-	Aq          int     `json:"aq"` //KB
-	Vq          int     `json:"vq"` //kb
-	Sq          int     `json:"sq"` //B
-	F           string  `json:"f"`  //B
+	MasterClock float32 `json:"master_clock" toml:"master_clock"`
+	Key         string  `json:"key" toml:"key"`
+	Diff        float32 `json:"diff" toml:"diff"`
+	Fd          int     `json:"fd" toml:"fd"`
+	Aq          int     `json:"aq" toml:"aq"` //KB
+	Vq          int     `json:"vq" toml:"vq"` //kb
+	Sq          int     `json:"sq" toml:"sq"` //B
+	F           string  `json:"f" toml:"f"`   //B
+}
+
+func (p *FFplay) Reset() {
+	p.MasterClock = 0
+	p.Key = emptysString.Value()
+	p.Diff = 0
+	p.Fd = 0
+	p.Aq = 0
+	p.Vq = 0
+	p.Sq = 0
+	p.F = emptysString.Value()
 }
 
 var playRegexp = regexp.MustCompile(`\\s+|:`)
@@ -33,33 +42,5 @@ func makePlayProgress(line string, ff *FFplay) {
 		&ff.MasterClock, &ff.Key, &ff.Diff, &ff.Fd, &ff.Aq, &ff.Vq, &ff.Sq, &ff.F)
 	if err != nil {
 		return
-	}
-}
-
-func (r DefaultProgress) MakePlayProgress(ctx context.Context, stream io.ReadCloser, out chan FFplay) {
-	if ctx == nil || ctx.Err() != nil {
-		return
-	}
-	r.ffplayNoChan(ctx, r.makeScanner(stream), out)
-}
-func (r DefaultProgress) ffplayNoChan(ctx context.Context, scanner *bufio.Scanner, out chan FFplay) {
-	pp := FFplay{}
-	next := false
-	for scanner.Scan() {
-		line := scanner.Text()
-		if r.Filter != nil {
-			next = r.Filter(line)
-		} else {
-			next = strings.Contains(line, "fd=") && strings.Contains(line, "aq=")
-		}
-		if next {
-			select {
-			case <-ctx.Done():
-				return
-			default:
-				makePlayProgress(line, &pp)
-				out <- pp
-			}
-		}
 	}
 }

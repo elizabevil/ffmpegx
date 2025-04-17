@@ -1,18 +1,18 @@
 package parsex
 
 import (
-	"encoding/json"
 	"fmt"
+	"github.com/bytedance/sonic"
 	"net/url"
 )
 
 func Options(r any) (string, error) {
-	marshal, err := json.Marshal(r)
+	marshal, err := sonic.Marshal(r)
 	if err != nil {
 		return "", err
 	}
 	var m map[string]any
-	err = json.Unmarshal(marshal, &m)
+	err = sonic.Unmarshal(marshal, &m)
 	if err != nil {
 		return "", err
 	}

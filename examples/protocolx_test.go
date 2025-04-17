@@ -11,7 +11,7 @@ import (
 // options contains a list of &-separated options of the form key=val.
 func TestProtocolx(t *testing.T) {
 	rtp := protocolx.RTP{
-		Ttl:           8080,
+		Ttl:           80,
 		RtcpPort:      8080,
 		LocalRtpPort:  8080,
 		LocalRtcpPort: 8080,

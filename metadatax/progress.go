@@ -1,43 +1,58 @@
 package metadatax
 
 import (
-	"bufio"
-	"bytes"
-	"context"
-	"io"
 	"regexp"
 	"strings"
 )
 
 // Progress  fftools\ffmpeg.c
 type Progress struct {
-	Frame string `json:"frame"`
-	Fps   string `json:"fps"`
-	Q     string `json:"q"`
-	Size  string `json:"size"`
-	Time  string `json:"time"`
+	Frame string `json:"frame" toml:"frame"`
+	Fps   string `json:"fps" toml:"fps"`
+	Q     string `json:"q" toml:"q"`
+	Size  string `json:"size" toml:"size"`
+	Time  string `json:"time" toml:"time"`
 
-	Bitrate   string `json:"bitrate"`
-	TotalSize string `json:"total_size"`
+	Bitrate   string `json:"bitrate" toml:"bitrate"`
+	TotalSize string `json:"total_size" toml:"total_size"`
 
-	Speed      string `json:"speed"`
-	OutTimeUs  string `json:"out_time_us"`
-	OutTimeMs  string `json:"out_time_ms"`
-	OutTime    string `json:"out_time"`
-	Dup        string `json:"dup"`
-	DropFrames string `json:"drop_frames"`
+	Speed      string `json:"speed" toml:"speed"`
+	OutTimeUs  string `json:"out_time_us" toml:"out_time_us"`
+	OutTimeMs  string `json:"out_time_ms" toml:"out_time_ms"`
+	OutTime    string `json:"out_time" toml:"out_time"`
+	Dup        string `json:"dup" toml:"dup"`
+	DropFrames string `json:"drop_frames" toml:"drop_frames"`
 
-	Progress string `json:"progress"`
+	Progress string `json:"progress" toml:"progress"`
 }
 
-type DefaultProgress struct {
-	Filter func(str string) bool
+func (p *Progress) Reset() {
+	p.Frame = emptysString.Value()
+	p.Fps = emptysString.Value()
+	p.Q = emptysString.Value()
+	p.Size = emptysString.Value()
+	p.Time = emptysString.Value()
+
+	p.Bitrate = emptysString.Value()
+	p.TotalSize = emptysString.Value()
+
+	p.Speed = emptysString.Value()
+	p.OutTimeUs = emptysString.Value()
+	p.OutTimeMs = emptysString.Value()
+	p.OutTime = emptysString.Value()
+	p.Dup = emptysString.Value()
+	p.DropFrames = emptysString.Value()
+
+	p.Progress = emptysString.Value()
 }
 
-var re = regexp.MustCompile(`=\s+`)
+var defaultFilterFunc = func(line string) bool {
+	return strings.Contains(line, "time=") && strings.Contains(line, "bitrate=") && strings.Contains(line, "speed=")
+}
+var progressRegexp = regexp.MustCompile(`=\s+`)
 
 func makeProgress(line string, pp *Progress) {
-	st := re.ReplaceAllString(line, `=`)
+	st := progressRegexp.ReplaceAllString(line, `=`)
 	f := strings.Fields(st)
 	for j := 0; j < len(f); j++ {
 		field := f[j]
@@ -74,87 +89,6 @@ func makeProgress(line string, pp *Progress) {
 				pp.DropFrames = fieldvalue
 			case "progress":
 				pp.Progress = fieldvalue
-			}
-		}
-	}
-}
-
-func (r DefaultProgress) makeScanner(stream io.ReadCloser) *bufio.Scanner {
-	split := func(data []byte, atEOF bool) (advance int, token []byte, spliterror error) {
-		if atEOF && len(data) == 0 {
-			return 0, nil, nil
-		}
-		if i := bytes.IndexByte(data, '\n'); i >= 0 {
-			// We have a full newline-terminated line.
-			return i + 1, data[0:i], nil
-		}
-		if i := bytes.IndexByte(data, '\r'); i >= 0 {
-			// We have a cr terminated line
-			return i + 1, data[0:i], nil
-		}
-		if atEOF {
-			return len(data), data, nil
-		}
-		return 0, nil, nil
-	}
-	scanner := bufio.NewScanner(stream)
-	scanner.Split(split)
-	buf := make([]byte, 2)
-	scanner.Buffer(buf, bufio.MaxScanTokenSize)
-	return scanner
-}
-
-func (r DefaultProgress) MakeProgress(ctx context.Context, stream io.ReadCloser, out chan Progress) {
-	if ctx == nil || ctx.Err() != nil {
-		return
-	}
-	go r.progressHandle(ctx, r.makeScanner(stream), out)
-	select {
-	case <-ctx.Done():
-		close(out)
-		return
-	}
-}
-func (r DefaultProgress) progressHandle(ctx context.Context, scanner *bufio.Scanner, out chan Progress) {
-	pp := Progress{}
-	next := false
-	for scanner.Scan() {
-		line := scanner.Text()
-		if r.Filter != nil {
-			next = r.Filter(line)
-		} else {
-			next = strings.Contains(line, "time=") && strings.Contains(line, "bitrate=") && strings.Contains(line, "speed=")
-		}
-		if next && ctx.Err() == nil {
-			makeProgress(line, &pp)
-			out <- pp
-		}
-	}
-}
-
-func (r DefaultProgress) MakeProgressX(ctx context.Context, stream io.ReadCloser, handle ProgressHandle) {
-	if ctx == nil || ctx.Err() != nil {
-		return
-	}
-	r.progressNoChan(ctx, r.makeScanner(stream), handle)
-}
-func (r DefaultProgress) progressNoChan(ctx context.Context, scanner *bufio.Scanner, handle ProgressHandle) {
-	pp := Progress{}
-	for scanner.Scan() {
-		line := scanner.Text()
-		next := false
-		if r.Filter != nil {
-			next = r.Filter(line)
-		} else {
-			next = strings.Contains(line, "time=") && strings.Contains(line, "size=") && strings.Contains(line, "bitrate=") && strings.Contains(line, "speed=")
-		}
-		if next {
-			select {
-			case <-ctx.Done():
-				return
-			default:
-				makeProgress(line, &pp)
-				handle(pp)
 			}
 		}
 	}

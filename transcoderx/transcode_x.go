@@ -234,7 +234,7 @@ func PipelinePlay(bin string, ph interfacex.ProgressHandle, args interfacex.IArg
 		handle(cmd)
 	}
 	DebugPrint("%s", cmd.String())
-	return func(ctx context.Context, handle func(process *os.Process), progressHandle ...metadatax.PlayHandle) error {
+	return func(ctx context.Context, handle func(process *os.Process), progressHandle ...metadatax.FFPlayHandle) error {
 		stderrIn, err := cmd.StderrPipe()
 		if err != nil {
 			return fmt.Errorf("pipe %w", err)
